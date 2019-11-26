@@ -22,8 +22,8 @@ public class CSV_Data : MonoBehaviour
     void Start()
     {
         instance = this;
-        current_sessions_data.session_id = 0;
         current_sessions_data.player_name = user_name;
+        current_sessions_data.session_id = CSV_Manager.NumberSessionsUser(user_name);
         current_sessions_data.session_start = DateTime.Now.ToString();
     }
 

@@ -77,6 +77,9 @@ public static class CSV_Manager
             }
         }
     }
+
+   
+
     static void AllCSVExists()
     {
         //Path
@@ -127,17 +130,29 @@ public static class CSV_Manager
             sw.WriteLine(endString);
         }
     }
-    /*
-    static bool UserIsRegistredAlready(string name)
+    public static int NumberSessionsUser(string name)
     {
-        string new_data = "";
-        for (int i = 0; i < strings.Length; i++)
+        int counter = 0;
+
+        StreamReader strReader = new StreamReader(Application.dataPath + "/" + csvDirectoryName + "/" + csvFileSessions);
+        bool finish = false;
+
+        while (!finish)
         {
-            if (finalString != "")
+            string data = strReader.ReadLine();
+            if (data == null)
             {
-                finalString += reportSeparator;
+                finish = true;
+                break;
+            }
+            var data_values = data.Split(';');
+
+            if (data_values[1].ToString() == name)
+            {
+                counter++;
             }
         }
-            return true;
-    }*/
+        return counter;
+    }
+
 }
