@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour {
 
-    
     bool _finished;
     float _time;
     // Use this for initialization
     void Start () {
-		
+	
 	}
 	
 	// Update is called once per frame
