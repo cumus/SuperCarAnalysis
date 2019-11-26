@@ -209,6 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user_name: Gerard
+  session_id: 0
 --- !u!1001 &64873392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1287,6 +1288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e058cdfd5837c4da45811a174b96f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data_csv: {fileID: 34993514}
 --- !u!4 &1901105225 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4008079357774976, guid: 14ff7baa2ac23214181835d8ccccd548,

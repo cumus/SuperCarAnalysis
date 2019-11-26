@@ -60,21 +60,38 @@ public static class CSV_Manager
         }
         //Check if files exist
         AllCSVExists();
-        if (type_data == typeDataCSV.SESSIONS)
+        switch (type_data)
         {
-            using (StreamWriter sw = File.AppendText(Application.dataPath + "/" + csvDirectoryName + "/" + csvFileSessions))
-            {
-                string endString = "";
-                for (int i = 0; i < strings.Length; i++)
+            case typeDataCSV.SESSIONS:
+                using (StreamWriter sw = File.AppendText(Application.dataPath + "/" + csvDirectoryName + "/" + csvFileSessions))
                 {
-                    if (endString != "")
+                    string endString = "";
+                    for (int i = 0; i < strings.Length; i++)
                     {
-                        endString += csvSeparator;
+                        if (endString != "")
+                        {
+                            endString += csvSeparator;
+                        }
+                        endString += strings[i];
                     }
-                    endString += strings[i];
+                    sw.WriteLine(endString);
                 }
-                sw.WriteLine(endString);
-            }
+                break;
+            case typeDataCSV.LAPS:
+                using (StreamWriter sw = File.AppendText(Application.dataPath + "/" + csvDirectoryName + "/" + csvFileLaps))
+                {
+                    string endString = "";
+                    for (int i = 0; i < strings.Length; i++)
+                    {
+                        if (endString != "")
+                        {
+                            endString += csvSeparator;
+                        }
+                        endString += strings[i];
+                    }
+                    sw.WriteLine(endString);
+                }
+                break;
         }
     }
 
