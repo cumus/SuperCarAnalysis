@@ -3,6 +3,13 @@ using System.IO;
 
 public static class CSV_Manager
 {
+    public enum typeDataCSV
+    {
+        SESSIONS,
+        CRASHES,
+        POSITIONS,
+        LAPS
+    }
     private static string csvDirectoryName = "Analysis/CSV_Files";
 
     private static string csvFileSessions = "sessions.csv";
@@ -43,15 +50,32 @@ public static class CSV_Manager
         "time"
     };
 
-    public static void AppendToCSV(string[] strings)
+    public static void AppendToCSV(string[] strings, typeDataCSV type_data)
     {
         //Check if folder exists
         string directory_path = Application.dataPath + "/" + csvDirectoryName;
-        if (!Directory.Exists(directory_path)){
+        if (!Directory.Exists(directory_path))
+        {
             Directory.CreateDirectory(directory_path);
         }
         //Check if files exist
         AllCSVExists();
+        if (type_data == typeDataCSV.SESSIONS)
+        {
+            using (StreamWriter sw = File.AppendText(Application.dataPath + "/" + csvDirectoryName + "/" + csvFileSessions))
+            {
+                string endString = "";
+                for (int i = 0; i < strings.Length; i++)
+                {
+                    if (endString != "")
+                    {
+                        endString += csvSeparator;
+                    }
+                    endString += strings[i];
+                }
+                sw.WriteLine(endString);
+            }
+        }
     }
     static void AllCSVExists()
     {
@@ -100,6 +124,20 @@ public static class CSV_Manager
                 }
                 endString += data[i]; 
             }
+            sw.WriteLine(endString);
         }
     }
+    /*
+    static bool UserIsRegistredAlready(string name)
+    {
+        string new_data = "";
+        for (int i = 0; i < strings.Length; i++)
+        {
+            if (finalString != "")
+            {
+                finalString += reportSeparator;
+            }
+        }
+            return true;
+    }*/
 }
