@@ -92,6 +92,22 @@ public static class CSV_Manager
                     sw.WriteLine(endString);
                 }
                 break;
+
+            case typeDataCSV.CRASHES:
+                using (StreamWriter sw = File.AppendText(Application.dataPath + "/" + csvDirectoryName + "/" + csvFileCrashes))
+                {
+                    string endString = "";
+                    for (int i = 0; i < strings.Length; i++)
+                    {
+                        if (endString != "")
+                        {
+                            endString += csvSeparator;
+                        }
+                        endString += strings[i];
+                    }
+                    sw.WriteLine(endString);
+                }
+                break;
         }
     }
 
@@ -147,9 +163,9 @@ public static class CSV_Manager
             sw.WriteLine(endString);
         }
     }
-    public static int NumberSessionsUser(string name)
+    public static uint NumberSessionsUser(string name)
     {
-        int counter = 0;
+        uint counter = 0;
 
         StreamReader strReader = new StreamReader(Application.dataPath + "/" + csvDirectoryName + "/" + csvFileSessions);
         bool finish = false;

@@ -13,7 +13,7 @@ public class Goal : MonoBehaviour {
     [System.Serializable]
     public struct lapsCSVData
     {
-        public int lap_id;
+        public uint lap_id;
         public string player_name;
         public string session_start;
         public string session_end;
@@ -48,7 +48,10 @@ public class Goal : MonoBehaviour {
         _finished = false;
     }
 
-
+    public uint GetLaps()
+    {
+        return current_laps_data.lap_id;
+    }
     string[] lapData()
     {
         string[] data = new string[4];

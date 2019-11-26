@@ -12,7 +12,7 @@ public class CSV_Data : MonoBehaviour
     [System.Serializable]
     public struct SessionsCSVData
     {
-        public int session_id;
+        public uint session_id;
         public string player_name;
         public string session_start;
         public string session_end;
@@ -34,7 +34,7 @@ public class CSV_Data : MonoBehaviour
     {
        CSV_Manager.AppendToCSV(SessionsData(), CSV_Manager.typeDataCSV.SESSIONS);
     }
-    public int GetSessionID()
+    public uint GetSessionID()
     {
         return current_sessions_data.session_id;
     }
