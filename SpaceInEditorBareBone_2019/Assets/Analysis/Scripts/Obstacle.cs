@@ -18,23 +18,29 @@ public class Obstacle : MonoBehaviour {
     }
     public uint collision_obj;
     private crashCSVData current_crash_data;
-
+    bool finished = false;
     void Start()
     {
         current_crash_data.collision_obj = collision_obj;
     }
-    void OnCollision(Collider col)
+    void OnCollisionEnter(Collision col)
     {
-        if ((col.tag == "Player" || col.transform.root.tag == "Player"))
+        if (col.gameObject.name == "Car" && !finished)
         {
            
             CSV_Manager.AppendToCSV(CrashesData(), CSV_Manager.typeDataCSV.CRASHES);
             current_crash_data.crash_id++;
+            StartCoroutine(ResetTag());
+            finished = true;
             Debug.Log("HOLA");
 
         }
     }
-
+    private IEnumerator ResetTag()
+    {
+        yield return new WaitForSeconds(3);
+        finished = false;
+    }
     string[] CrashesData()
     {
         string[] data = new string[7];
