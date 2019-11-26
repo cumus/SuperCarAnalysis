@@ -126,10 +126,9 @@ public static class CSV_Manager
                 break;
         }
     }
-
+    
    
-
-    static void AllCSVExists()
+    public static void AllCSVExists()
     {
         //Path
         string directory_path = Application.dataPath + "/" + csvDirectoryName;

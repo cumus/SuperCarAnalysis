@@ -19,6 +19,7 @@ public class CSV_Data : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CSV_Manager.AllCSVExists();
         current_sessions_data.player_name = user_name;
         current_sessions_data.session_id = CSV_Manager.NumberSessionsUser(user_name);
         current_sessions_data.session_start = DateTime.Now.ToString();
