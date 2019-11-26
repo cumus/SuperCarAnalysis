@@ -108,6 +108,22 @@ public static class CSV_Manager
                     sw.WriteLine(endString);
                 }
                 break;
+
+            case typeDataCSV.POSITIONS:
+                using (StreamWriter sw = File.AppendText(Application.dataPath + "/" + csvDirectoryName + "/" + csvFilePositions))
+                {
+                    string endString = "";
+                    for (int i = 0; i < strings.Length; i++)
+                    {
+                        if (endString != "")
+                        {
+                            endString += csvSeparator;
+                        }
+                        endString += strings[i];
+                    }
+                    sw.WriteLine(endString);
+                }
+                break;
         }
     }
 

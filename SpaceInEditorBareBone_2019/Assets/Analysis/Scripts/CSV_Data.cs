@@ -6,7 +6,6 @@ public class CSV_Data : MonoBehaviour
 {
     public string user_name;
     //Sessions
-    public int session_id;
     private SessionsCSVData current_sessions_data;
 
     [System.Serializable]
