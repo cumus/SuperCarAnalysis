@@ -27,20 +27,21 @@ public class Obstacle : MonoBehaviour {
     {
         if (col.gameObject.name == "Car" && !finished)
         {
-           
-            CSV_Manager.AppendToCSV(CrashesData(), CSV_Manager.typeDataCSV.CRASHES);
             current_crash_data.crash_id++;
+
+            CSV_Manager.AppendToCSV(CrashesData(), CSV_Manager.typeDataCSV.CRASHES);
+            
             StartCoroutine(ResetTag());
             finished = true;
-            Debug.Log("HOLA");
-
         }
     }
+
     private IEnumerator ResetTag()
     {
         yield return new WaitForSeconds(3);
         finished = false;
     }
+
     string[] CrashesData()
     {
         string[] data = new string[7];

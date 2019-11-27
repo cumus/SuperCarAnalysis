@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Goal : MonoBehaviour {
     public CSV_Data data_csv;
 
     bool _finished;
-    float _time;
 
     private lapsCSVData current_laps_data;
+
+    DateTime race_started;
 
     [System.Serializable]
     public struct lapsCSVData
@@ -22,11 +24,11 @@ public class Goal : MonoBehaviour {
     // Use this for initialization
     void Start () {
         current_laps_data.lap_id = 0;
+        race_started = DateTime.Now;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        _time += Time.deltaTime;
 	}
 
     void OnTriggerEnter(Collider col)
@@ -34,11 +36,12 @@ public class Goal : MonoBehaviour {
         if ((col.tag == "Player" || col.transform.root.tag == "Player" ) && !_finished)
         {
             current_laps_data.lap_id++;
+            
             CSV_Manager.AppendToCSV(lapData(), CSV_Manager.typeDataCSV.LAPS);
+
             _finished = true;            
             StartCoroutine(ResetTag());
-            Debug.Log(_time);
-            _time = 0;
+            race_started = DateTime.Now;
         }
     }
 
@@ -58,10 +61,7 @@ public class Goal : MonoBehaviour {
         data[0] = current_laps_data.lap_id.ToString();
         data[1] = data_csv.GetSessionID().ToString();
         data[2] = data_csv.GetPlayerName();
-        string minutes = Mathf.Floor(_time / 60).ToString();
-        string seconds = Mathf.RoundToInt(_time %60).ToString();
-
-        data[3] = minutes + ":" + seconds;
+        data[3] = (DateTime.Now - race_started).ToString();
 
         return data;
     }

@@ -58,70 +58,76 @@ public static class CSV_Manager
         {
             Directory.CreateDirectory(directory_path);
         }
+
         //Check if files exist
         AllCSVExists();
+
         switch (type_data)
         {
             case typeDataCSV.SESSIONS:
                 using (StreamWriter sw = File.AppendText(Application.dataPath + "/" + csvDirectoryName + "/" + csvFileSessions))
                 {
-                    string endString = "";
-                    for (int i = 0; i < strings.Length; i++)
+                    string endString = strings[0];
+
+                    for (int i = 1; i < strings.Length; i++)
                     {
-                        if (endString != "")
-                        {
-                            endString += csvSeparator;
-                        }
+                        endString += csvSeparator;
                         endString += strings[i];
                     }
+
                     sw.WriteLine(endString);
+
+                    Debug.Log(type_data.ToString() + ": " + endString);
                 }
                 break;
             case typeDataCSV.LAPS:
                 using (StreamWriter sw = File.AppendText(Application.dataPath + "/" + csvDirectoryName + "/" + csvFileLaps))
                 {
-                    string endString = "";
-                    for (int i = 0; i < strings.Length; i++)
+                    string endString = strings[0];
+
+                    for (int i = 1; i < strings.Length; i++)
                     {
-                        if (endString != "")
-                        {
-                            endString += csvSeparator;
-                        }
+                        endString += csvSeparator;
                         endString += strings[i];
                     }
+
                     sw.WriteLine(endString);
+
+                    Debug.Log(type_data.ToString() + ": " + endString);
                 }
                 break;
 
             case typeDataCSV.CRASHES:
                 using (StreamWriter sw = File.AppendText(Application.dataPath + "/" + csvDirectoryName + "/" + csvFileCrashes))
                 {
-                    string endString = "";
-                    for (int i = 0; i < strings.Length; i++)
+                    string endString = strings[0];
+
+                    for (int i = 1; i < strings.Length; i++)
                     {
-                        if (endString != "")
-                        {
-                            endString += csvSeparator;
-                        }
+                        endString += csvSeparator;
                         endString += strings[i];
                     }
+
                     sw.WriteLine(endString);
+
+                    Debug.Log(type_data.ToString() + ": " + endString);
                 }
                 break;
 
             case typeDataCSV.POSITIONS:
                 using (StreamWriter sw = File.AppendText(Application.dataPath + "/" + csvDirectoryName + "/" + csvFilePositions))
                 {
-                    string endString = "";
-                    for (int i = 0; i < strings.Length; i++)
+                    string endString = strings[0];
+
+                    for (int i = 1; i < strings.Length; i++)
                     {
-                        if (endString != "")
-                        {
-                            endString += csvSeparator;
-                        }
+                        endString += csvSeparator;
                         endString += strings[i];
                     }
+
                     sw.WriteLine(endString);
+
+                    Debug.Log(type_data.ToString() + ": " + endString);
                 }
                 break;
         }

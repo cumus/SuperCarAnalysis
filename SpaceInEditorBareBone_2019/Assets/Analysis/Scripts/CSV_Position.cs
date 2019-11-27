@@ -22,7 +22,6 @@ public class CSV_Position : MonoBehaviour
     private positionCSVData current_pos_data;
     void Start()
     {
-        InvokeRepeating("CSVWrite", 2.0f, writeToCSVEverySecond);
     }
 
     // Update is called once per frame
@@ -32,8 +31,8 @@ public class CSV_Position : MonoBehaviour
     void CSVWrite()
     {
         CSV_Manager.AppendToCSV(PosData(), CSV_Manager.typeDataCSV.POSITIONS);
-        Debug.Log("Writing for pos");
     }
+
     string[] PosData()
     {
         string[] data = new string[6];
@@ -45,9 +44,9 @@ public class CSV_Position : MonoBehaviour
         string car_pos_x = car.transform.position.x.ToString();
         car_pos_x = car_pos_x.Replace(",", ".");
         string car_pos_y = car.transform.position.y.ToString();
-        car_pos_y = car_pos_x.Replace(",", ".");
+        car_pos_y = car_pos_y.Replace(",", ".");
         string car_pos_z = car.transform.position.z.ToString();
-        car_pos_z = car_pos_x.Replace(",", ".");
+        car_pos_z = car_pos_z.Replace(",", ".");
 
         data[3] = "(" + car_pos_x + "," + car_pos_y + "," + car_pos_z + ")";
         //Vel
@@ -72,5 +71,10 @@ public class CSV_Position : MonoBehaviour
         data[5] = "(" + car_rot_x + "," + car_rot_y + "," + car_rot_z + "," + car_rot_w + ")";
 
         return data;
+    }
+
+    public void BeginRace()
+    {
+        InvokeRepeating("CSVWrite", 0.0f, writeToCSVEverySecond);
     }
 }
