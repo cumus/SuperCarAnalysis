@@ -1,0 +1,828 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20194.19.1010.1202                               -->
+<workbook original-version='18.1' source-build='2019.4.0 (20194.19.1010.1202)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <SheetIdentifierTracking ignorable='true' predowngraded='true' />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='crashes' inline='true' name='federated.0dgf5jk1xbiiw418pu2s90s3etom' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='crashes' name='textscan.1oinoxz1pjmuqm199b2g60o5so7c'>
+            <connection class='textscan' directory='E:/Audio Unity Wwise/SuperCarAnalysis/SpaceInEditorBareBone_2019/Assets/Analysis/CSV_Files' filename='crashes.csv' password='' port='0' server='' />
+          </named-connection>
+        </named-connections>
+        <relation join='inner' type='join'>
+          <clause type='join'>
+            <expression op='='>
+              <expression op='[crashes.csv].[session_id]' />
+              <expression op='[sessions.csv].[session_id]' />
+            </expression>
+          </clause>
+          <relation join='left' type='join'>
+            <clause type='join'>
+              <expression op='='>
+                <expression op='[crashes.csv].[session_id]' />
+                <expression op='[laps.csv].[session_id]' />
+              </expression>
+            </clause>
+            <relation join='left' type='join'>
+              <clause type='join'>
+                <expression op='='>
+                  <expression op='[crashes.csv].[session_id]' />
+                  <expression op='[positions.csv].[session_id]' />
+                </expression>
+              </clause>
+              <relation connection='textscan.1oinoxz1pjmuqm199b2g60o5so7c' name='crashes.csv' table='[crashes#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='es_ES' separator=';'>
+                  <column datatype='string' name='username' ordinal='0' />
+                  <column datatype='integer' name='crash_id' ordinal='1' />
+                  <column datatype='string' name='positon' ordinal='2' />
+                  <column datatype='integer' name='current_lap' ordinal='3' />
+                  <column datatype='datetime' name='time' ordinal='4' />
+                  <column datatype='integer' name='session_id' ordinal='5' />
+                  <column datatype='integer' name='collision_obj_id' ordinal='6' />
+                </columns>
+              </relation>
+              <relation connection='textscan.1oinoxz1pjmuqm199b2g60o5so7c' name='positions.csv' table='[positions#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='es_ES' separator=';'>
+                  <column datatype='integer' name='session_id' ordinal='0' />
+                  <column datatype='string' name='username' ordinal='1' />
+                  <column datatype='datetime' name='time' ordinal='2' />
+                  <column datatype='string' name='position' ordinal='3' />
+                  <column datatype='string' name='velocity' ordinal='4' />
+                  <column datatype='string' name='rotation' ordinal='5' />
+                </columns>
+              </relation>
+            </relation>
+            <relation connection='textscan.1oinoxz1pjmuqm199b2g60o5so7c' name='laps.csv' table='[laps#csv]' type='table'>
+              <columns character-set='UTF-8' header='yes' locale='es_ES' separator=';'>
+                <column datatype='integer' name='lap_id' ordinal='0' />
+                <column datatype='integer' name='session_id' ordinal='1' />
+                <column datatype='string' name='username' ordinal='2' />
+                <column datatype='datetime' name='time' ordinal='3' />
+              </columns>
+            </relation>
+          </relation>
+          <relation connection='textscan.1oinoxz1pjmuqm199b2g60o5so7c' name='sessions.csv' table='[sessions#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='es_ES' separator=';'>
+              <column datatype='integer' name='session_id' ordinal='0' />
+              <column datatype='string' name='username' ordinal='1' />
+              <column datatype='datetime' name='session_start' ordinal='2' />
+              <column datatype='datetime' name='session_end' ordinal='3' />
+            </columns>
+          </relation>
+        </relation>
+        <cols>
+          <map key='[collision_obj_id]' value='[crashes.csv].[collision_obj_id]' />
+          <map key='[crash_id]' value='[crashes.csv].[crash_id]' />
+          <map key='[current_lap]' value='[crashes.csv].[current_lap]' />
+          <map key='[lap_id]' value='[laps.csv].[lap_id]' />
+          <map key='[position]' value='[positions.csv].[position]' />
+          <map key='[positon]' value='[crashes.csv].[positon]' />
+          <map key='[rotation]' value='[positions.csv].[rotation]' />
+          <map key='[session_end]' value='[sessions.csv].[session_end]' />
+          <map key='[session_id (laps.csv)]' value='[laps.csv].[session_id]' />
+          <map key='[session_id (positions.csv)]' value='[positions.csv].[session_id]' />
+          <map key='[session_id (sessions.csv)]' value='[sessions.csv].[session_id]' />
+          <map key='[session_id]' value='[crashes.csv].[session_id]' />
+          <map key='[session_start]' value='[sessions.csv].[session_start]' />
+          <map key='[time (laps.csv)]' value='[laps.csv].[time]' />
+          <map key='[time (positions.csv)]' value='[positions.csv].[time]' />
+          <map key='[time]' value='[crashes.csv].[time]' />
+          <map key='[username (laps.csv)]' value='[laps.csv].[username]' />
+          <map key='[username (positions.csv)]' value='[positions.csv].[username]' />
+          <map key='[username (sessions.csv)]' value='[sessions.csv].[username]' />
+          <map key='[username]' value='[crashes.csv].[username]' />
+          <map key='[velocity]' value='[positions.csv].[velocity]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[crashes.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;es&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;€&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='decimal-char'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;;&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;es_ES&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='thousands-char'>&quot;.&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>username</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[username]</local-name>
+            <parent-name>[crashes.csv]</parent-name>
+            <remote-alias>username</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LES_RES' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>crash_id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[crash_id]</local-name>
+            <parent-name>[crashes.csv]</parent-name>
+            <remote-alias>crash_id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>positon</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[positon]</local-name>
+            <parent-name>[crashes.csv]</parent-name>
+            <remote-alias>positon</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LES_RES' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>current_lap</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[current_lap]</local-name>
+            <parent-name>[crashes.csv]</parent-name>
+            <remote-alias>current_lap</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>time</remote-name>
+            <remote-type>135</remote-type>
+            <local-name>[time]</local-name>
+            <parent-name>[crashes.csv]</parent-name>
+            <remote-alias>time</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>session_id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[session_id]</local-name>
+            <parent-name>[crashes.csv]</parent-name>
+            <remote-alias>session_id</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>collision_obj_id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[collision_obj_id]</local-name>
+            <parent-name>[crashes.csv]</parent-name>
+            <remote-alias>collision_obj_id</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[positions.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;es&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;€&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='decimal-char'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;;&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;es_ES&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='thousands-char'>&quot;.&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>session_id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[session_id (positions.csv)]</local-name>
+            <parent-name>[positions.csv]</parent-name>
+            <remote-alias>session_id</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>username</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[username (positions.csv)]</local-name>
+            <parent-name>[positions.csv]</parent-name>
+            <remote-alias>username</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LES_RES' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>time</remote-name>
+            <remote-type>135</remote-type>
+            <local-name>[time (positions.csv)]</local-name>
+            <parent-name>[positions.csv]</parent-name>
+            <remote-alias>time</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>position</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[position]</local-name>
+            <parent-name>[positions.csv]</parent-name>
+            <remote-alias>position</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LES_RES' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>velocity</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[velocity]</local-name>
+            <parent-name>[positions.csv]</parent-name>
+            <remote-alias>velocity</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LES_RES' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>rotation</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[rotation]</local-name>
+            <parent-name>[positions.csv]</parent-name>
+            <remote-alias>rotation</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LES_RES' />
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[laps.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;es&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;€&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='decimal-char'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;;&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;es_ES&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='thousands-char'>&quot;.&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>lap_id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[lap_id]</local-name>
+            <parent-name>[laps.csv]</parent-name>
+            <remote-alias>lap_id</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>session_id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[session_id (laps.csv)]</local-name>
+            <parent-name>[laps.csv]</parent-name>
+            <remote-alias>session_id</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>username</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[username (laps.csv)]</local-name>
+            <parent-name>[laps.csv]</parent-name>
+            <remote-alias>username</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LES_RES' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>time</remote-name>
+            <remote-type>134</remote-type>
+            <local-name>[time (laps.csv)]</local-name>
+            <parent-name>[laps.csv]</parent-name>
+            <remote-alias>time</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Hour</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[sessions.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;es&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;€&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='decimal-char'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;;&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;es_ES&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='thousands-char'>&quot;.&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>session_id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[session_id (sessions.csv)]</local-name>
+            <parent-name>[sessions.csv]</parent-name>
+            <remote-alias>session_id</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>username</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[username (sessions.csv)]</local-name>
+            <parent-name>[sessions.csv]</parent-name>
+            <remote-alias>username</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LES_RES' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>session_start</remote-name>
+            <remote-type>135</remote-type>
+            <local-name>[session_start]</local-name>
+            <parent-name>[sessions.csv]</parent-name>
+            <remote-alias>session_start</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>session_end</remote-name>
+            <remote-type>135</remote-type>
+            <local-name>[session_end]</local-name>
+            <parent-name>[sessions.csv]</parent-name>
+            <remote-alias>session_end</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Obstacle Pos Y' datatype='string' name='[Calculation_1070449395969822721]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='[positon - División 2]' />
+      </column>
+      <column aggregation='Sum' caption='Vel Magnitud XZ' datatype='real' name='[Calculation_1070449395979149319]' role='dimension' type='ordinal'>
+        <calculation class='tableau' formula='SQRT([velocity - División 1 - División 1]*[velocity - División 1 - División 1]*[velocity - División 3 - División 1]*[velocity - División 3 - División 1])' />
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Collision Obj Id' datatype='integer' name='[collision_obj_id]' role='dimension' type='ordinal' />
+      <column caption='Crash Id' datatype='integer' name='[crash_id]' role='dimension' type='ordinal' />
+      <column caption='Current Lap' datatype='integer' name='[current_lap]' role='measure' type='quantitative' />
+      <column caption='Lap Id' datatype='integer' name='[lap_id]' role='dimension' type='ordinal' />
+      <column aggregation='Sum' caption='Car Pos X' datatype='real' name='[position - División 1 - División 1]' role='dimension' type='ordinal' user:SplitFieldIndex='10' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[position - División 1]'>
+        <calculation class='tableau' formula='FLOAT( SPLIT( [position - División 1], &quot;(&quot;, 2 ) )' />
+      </column>
+      <column caption='Position - División 1' datatype='string' name='[position - División 1]' role='dimension' type='nominal' user:SplitFieldIndex='6' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[position]'>
+        <calculation class='tableau' formula='TRIM( SPLIT( [position], &quot;,&quot;, 1 ) )' />
+      </column>
+      <column caption='Position - División 2' datatype='string' name='[position - División 2]' role='dimension' type='nominal' user:SplitFieldIndex='7' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[position]'>
+        <calculation class='tableau' formula='TRIM( SPLIT( [position], &quot;,&quot;, 2 ) )' />
+      </column>
+      <column aggregation='Sum' caption='Car Pos Z' datatype='real' name='[position - División 3 - División 1]' role='dimension' type='ordinal' user:SplitFieldIndex='9' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[position - División 3]'>
+        <calculation class='tableau' formula='FLOAT( SPLIT( [position - División 3], &quot;)&quot;, 1 ) )' />
+      </column>
+      <column caption='Position - División 3' datatype='string' name='[position - División 3]' role='dimension' type='nominal' user:SplitFieldIndex='8' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[position]'>
+        <calculation class='tableau' formula='TRIM( SPLIT( [position], &quot;,&quot;, 3 ) )' />
+      </column>
+      <column caption='Position' datatype='string' name='[position]' role='dimension' type='nominal' />
+      <column caption='Obstacle Pos X' datatype='real' name='[positon - División 1 - División 1]' role='dimension' type='ordinal' user:SplitFieldIndex='4' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[positon - División 1]'>
+        <calculation class='tableau' formula='FLOAT( SPLIT( [positon - División 1], &quot;(&quot;, 2 ) )' />
+      </column>
+      <column caption='Positon - División 1' datatype='string' name='[positon - División 1]' role='dimension' type='nominal' user:SplitFieldIndex='1' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[positon]'>
+        <calculation class='tableau' formula='TRIM( SPLIT( [positon], &quot;,&quot;, 1 ) )' />
+      </column>
+      <column caption='Position - Division 1' datatype='string' name='[positon - División 2]' role='dimension' type='nominal' user:SplitFieldIndex='2' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[positon]'>
+        <calculation class='tableau' formula='TRIM( SPLIT( [positon], &quot;,&quot;, 2 ) )' />
+      </column>
+      <column caption='Obstacle Pos Z' datatype='real' name='[positon - División 3 - División 1]' role='dimension' type='ordinal' user:SplitFieldIndex='5' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[positon - División 3]'>
+        <calculation class='tableau' formula='FLOAT( SPLIT( [positon - División 3], &quot;)&quot;, 1 ) )' />
+      </column>
+      <column caption='Positon - División 3' datatype='string' name='[positon - División 3]' role='dimension' type='nominal' user:SplitFieldIndex='3' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[positon]'>
+        <calculation class='tableau' formula='TRIM( SPLIT( [positon], &quot;,&quot;, 3 ) )' />
+      </column>
+      <column caption='Positon' datatype='string' name='[positon]' role='dimension' type='nominal' />
+      <column caption='Rotation' datatype='string' name='[rotation]' role='dimension' type='nominal' />
+      <column caption='Session End' datatype='datetime' name='[session_end]' role='dimension' type='ordinal' />
+      <column caption='Session Id (Laps.Csv)' datatype='integer' name='[session_id (laps.csv)]' role='dimension' type='ordinal' />
+      <column caption='Session Id (Positions.Csv)' datatype='integer' name='[session_id (positions.csv)]' role='dimension' type='ordinal' />
+      <column caption='Session Id (Sessions.Csv)' datatype='integer' name='[session_id (sessions.csv)]' role='dimension' type='ordinal' />
+      <column caption='Session Id' datatype='integer' name='[session_id]' role='dimension' type='ordinal' />
+      <column caption='Session Start' datatype='datetime' name='[session_start]' role='dimension' type='ordinal' />
+      <column aggregation='Hour' caption='Time (Laps.Csv)' datatype='datetime' name='[time (laps.csv)]' role='dimension' type='ordinal' />
+      <column caption='Time (Positions.Csv)' datatype='datetime' name='[time (positions.csv)]' role='dimension' type='ordinal' />
+      <column caption='Time' datatype='datetime' name='[time]' role='dimension' type='ordinal' />
+      <column caption='Username (Laps.Csv)' datatype='string' name='[username (laps.csv)]' role='dimension' type='nominal' />
+      <column caption='Username (Positions.Csv)' datatype='string' name='[username (positions.csv)]' role='dimension' type='nominal' />
+      <column caption='Username (Sessions.Csv)' datatype='string' name='[username (sessions.csv)]' role='dimension' type='nominal' />
+      <column caption='Username' datatype='string' name='[username]' role='dimension' type='nominal' />
+      <column aggregation='Sum' caption='Vel X' datatype='real' name='[velocity - División 1 - División 1]' role='dimension' type='ordinal' user:SplitFieldIndex='14' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[velocity - División 1]'>
+        <calculation class='tableau' formula='FLOAT( SPLIT( [velocity - División 1], &quot;(&quot;, 2 ) )' />
+      </column>
+      <column caption='Velocity - División 1' datatype='string' name='[velocity - División 1]' role='dimension' type='nominal' user:SplitFieldIndex='11' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[velocity]'>
+        <calculation class='tableau' formula='TRIM( SPLIT( [velocity], &quot;,&quot;, 1 ) )' />
+      </column>
+      <column caption='Velocity - División 2' datatype='string' name='[velocity - División 2]' role='dimension' type='nominal' user:SplitFieldIndex='12' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[velocity]'>
+        <calculation class='tableau' formula='TRIM( SPLIT( [velocity], &quot;,&quot;, 2 ) )' />
+      </column>
+      <column aggregation='Sum' caption='Vel Z' datatype='real' name='[velocity - División 3 - División 1]' role='dimension' type='ordinal' user:SplitFieldIndex='15' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[velocity - División 3]'>
+        <calculation class='tableau' formula='FLOAT( SPLIT( [velocity - División 3], &quot;)&quot;, 1 ) )' />
+      </column>
+      <column caption='Velocity - División 3' datatype='string' name='[velocity - División 3]' role='dimension' type='nominal' user:SplitFieldIndex='13' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[velocity]'>
+        <calculation class='tableau' formula='TRIM( SPLIT( [velocity], &quot;,&quot;, 3 ) )' />
+      </column>
+      <column caption='Velocity' datatype='string' name='[velocity]' role='dimension' type='nominal' />
+      <column-instance column='[Calculation_1070449395979149319]' derivation='None' name='[none:Calculation_1070449395979149319:ok]' pivot='key' type='ordinal' />
+      <column-instance column='[Calculation_1070449395979149319]' derivation='Sum' name='[sum:Calculation_1070449395979149319:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Number of Records]' derivation='Sum' name='[sum:Number of Records:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[current_lap]' derivation='Sum' name='[sum:current_lap:qk]' pivot='key' type='quantitative' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.920655' measure-ordering='alphabetic' measure-percentage='0.0793451' show-structure='true' user-set-layout='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='shape' field='[:Measure Names]' type='shape'>
+            <map to='circle'>
+              <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:current_lap:qk]&quot;</bucket>
+            </map>
+            <map to='plus'>
+              <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:Calculation_1070449395979149319:qk]&quot;</bucket>
+            </map>
+            <map to='square'>
+              <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:Number of Records:qk]&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:Calculation_1070449395979149319:ok]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>5.6576646091239995e-14</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>31.887204541353</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>15.566512042530002</bucket>
+            </map>
+            <map to='#9c755f'>
+              <bucket>392.48798377809999</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>85.582613555199998</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>670.54077144079997</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>1.2664446900600002</bucket>
+            </map>
+            <map to='#edc948'>
+              <bucket>53.853665615040008</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>0.218264092799</bucket>
+            </map>
+            <map to='#ff9da7'>
+              <bucket>88.461381047000003</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;España&quot;' />
+      </semantic-values>
+      <date-options start-of-week='monday' />
+      <field-sort-info field-sort-order-type='custom-order'>
+        <field-sort-custom-order field='crash_id' />
+        <field-sort-custom-order field='positon' />
+        <field-sort-custom-order field='positon - División 1' />
+        <field-sort-custom-order field='positon - División 1 - División 1' />
+        <field-sort-custom-order field='positon - División 2' />
+        <field-sort-custom-order field='Calculation_1070449395969822721' />
+        <field-sort-custom-order field='positon - División 3' />
+        <field-sort-custom-order field='positon - División 3 - División 1' />
+        <field-sort-custom-order field='current_lap' />
+        <field-sort-custom-order field='collision_obj_id' />
+        <field-sort-custom-order field='session_id' />
+        <field-sort-custom-order field='username' />
+        <field-sort-custom-order field='time' />
+        <field-sort-custom-order field='position' />
+        <field-sort-custom-order field='velocity' />
+        <field-sort-custom-order field='rotation' />
+        <field-sort-custom-order field='session_id (positions.csv)' />
+        <field-sort-custom-order field='username (positions.csv)' />
+        <field-sort-custom-order field='time (positions.csv)' />
+        <field-sort-custom-order field='position - División 1' />
+        <field-sort-custom-order field='position - División 1 - División 1' />
+        <field-sort-custom-order field='position - División 2' />
+        <field-sort-custom-order field='position - División 3' />
+        <field-sort-custom-order field='position - División 3 - División 1' />
+        <field-sort-custom-order field='velocity - División 1' />
+        <field-sort-custom-order field='velocity - División 1 - División 1' />
+        <field-sort-custom-order field='velocity - División 2' />
+        <field-sort-custom-order field='velocity - División 3' />
+        <field-sort-custom-order field='velocity - División 3 - División 1' />
+      </field-sort-info>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Hoja 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='crashes' name='federated.0dgf5jk1xbiiw418pu2s90s3etom' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0dgf5jk1xbiiw418pu2s90s3etom'>
+            <column aggregation='Sum' caption='Vel Magnitud XZ' datatype='real' name='[Calculation_1070449395979149319]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='SQRT([velocity - División 1 - División 1]*[velocity - División 1 - División 1]*[velocity - División 3 - División 1]*[velocity - División 3 - División 1])' />
+            </column>
+            <column caption='Collision Obj Id' datatype='integer' name='[collision_obj_id]' role='dimension' type='ordinal' />
+            <column-instance column='[Calculation_1070449395979149319]' derivation='None' name='[none:Calculation_1070449395979149319:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[collision_obj_id]' derivation='None' name='[none:collision_obj_id:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[position - División 1 - División 1]' derivation='None' name='[none:position - División 1 - División 1:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[position - División 3 - División 1]' derivation='None' name='[none:position - División 3 - División 1:qk]' pivot='key' type='quantitative' />
+            <column aggregation='Sum' caption='Car Pos X' datatype='real' name='[position - División 1 - División 1]' role='dimension' type='ordinal' user:SplitFieldIndex='10' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[position - División 1]'>
+              <calculation class='tableau' formula='FLOAT( SPLIT( [position - División 1], &quot;(&quot;, 2 ) )' />
+            </column>
+            <column caption='Position - División 1' datatype='string' name='[position - División 1]' role='dimension' type='nominal' user:SplitFieldIndex='6' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[position]'>
+              <calculation class='tableau' formula='TRIM( SPLIT( [position], &quot;,&quot;, 1 ) )' />
+            </column>
+            <column aggregation='Sum' caption='Car Pos Z' datatype='real' name='[position - División 3 - División 1]' role='dimension' type='ordinal' user:SplitFieldIndex='9' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[position - División 3]'>
+              <calculation class='tableau' formula='FLOAT( SPLIT( [position - División 3], &quot;)&quot;, 1 ) )' />
+            </column>
+            <column caption='Position - División 3' datatype='string' name='[position - División 3]' role='dimension' type='nominal' user:SplitFieldIndex='8' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[position]'>
+              <calculation class='tableau' formula='TRIM( SPLIT( [position], &quot;,&quot;, 3 ) )' />
+            </column>
+            <column caption='Position' datatype='string' name='[position]' role='dimension' type='nominal' />
+            <column aggregation='Sum' caption='Vel X' datatype='real' name='[velocity - División 1 - División 1]' role='dimension' type='ordinal' user:SplitFieldIndex='14' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[velocity - División 1]'>
+              <calculation class='tableau' formula='FLOAT( SPLIT( [velocity - División 1], &quot;(&quot;, 2 ) )' />
+            </column>
+            <column caption='Velocity - División 1' datatype='string' name='[velocity - División 1]' role='dimension' type='nominal' user:SplitFieldIndex='11' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[velocity]'>
+              <calculation class='tableau' formula='TRIM( SPLIT( [velocity], &quot;,&quot;, 1 ) )' />
+            </column>
+            <column aggregation='Sum' caption='Vel Z' datatype='real' name='[velocity - División 3 - División 1]' role='dimension' type='ordinal' user:SplitFieldIndex='15' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[velocity - División 3]'>
+              <calculation class='tableau' formula='FLOAT( SPLIT( [velocity - División 3], &quot;)&quot;, 1 ) )' />
+            </column>
+            <column caption='Velocity - División 3' datatype='string' name='[velocity - División 3]' role='dimension' type='nominal' user:SplitFieldIndex='13' user:SplitFieldOrigin='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[velocity]'>
+              <calculation class='tableau' formula='TRIM( SPLIT( [velocity], &quot;,&quot;, 3 ) )' />
+            </column>
+            <column caption='Velocity' datatype='string' name='[velocity]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='cell-w' value='20' />
+            <format attr='cell-h' value='20' />
+            <format attr='cell' value='20' />
+            <format attr='cell-q' value='100' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <size column='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1070449395979149319:ok]' />
+              <lod column='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:collision_obj_id:ok]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='2' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+                <format attr='minheight' value='-1' />
+                <format attr='maxheight' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:position - División 3 - División 1:qk]</rows>
+        <cols>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:position - División 1 - División 1:qk]</cols>
+      </table>
+      <simple-id uuid='{7D92A81B-FAA1-4CE7-AD82-0A3B55A83B1C}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' maximized='true' name='Hoja 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='206'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='175'>
+            <card pane-specification-id='0' param='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1070449395979149319:ok]' type='size' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[:Measure Names]</field>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1070449395979149319:ok]</field>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1070449395979149319:qk]</field>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:collision_obj_id:ok]</field>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:crash_id:ok]</field>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:position - División 1 - División 1:ok]</field>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:position - División 3 - División 1:ok]</field>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:position:nk]</field>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:positon - División 1 - División 1:ok]</field>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:positon - División 2:nk]</field>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:positon - División 3 - División 1:ok]</field>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:velocity - División 1 - División 1:ok]</field>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:velocity - División 3 - División 1:ok]</field>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:Calculation_1070449395979149319:qk]</field>
+            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:current_lap:qk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{85EBC376-557A-4D03-87F4-B4D14961FF0D}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Hoja 1' width='192'>
+      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
+    </thumbnail>
+  </thumbnails>
+</workbook>
