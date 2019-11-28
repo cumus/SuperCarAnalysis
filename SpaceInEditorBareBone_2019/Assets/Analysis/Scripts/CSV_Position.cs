@@ -2,13 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class CSV_Position : MonoBehaviour
 {
     public CSV_Data data_csv;
     public GameObject car;
     public Rigidbody car_rb;
-    public float writeToCSVEverySecond = 5.0f;
+    public float writeToCSVEverySecond = 1.0f;
+
+    // HeatMap
+    GameObject HeatMapParent;
+    public GameObject CubeHeatMap;
+
     public struct positionCSVData
     {
         public uint session_id;
@@ -22,6 +28,7 @@ public class CSV_Position : MonoBehaviour
     private positionCSVData current_pos_data;
     void Start()
     {
+        HeatMapParent = new GameObject("HeatMapParent");
     }
 
     // Update is called once per frame
@@ -30,6 +37,8 @@ public class CSV_Position : MonoBehaviour
     }
     void CSVWrite()
     {
+        GameObject heatMapCube = Instantiate(CubeHeatMap, new Vector3(car.transform.position.x, CubeHeatMap.transform.localScale.y / 2, car.transform.position.z), Quaternion.identity, HeatMapParent.transform);
+
         CSV_Manager.AppendToCSV(PosData(), CSV_Manager.typeDataCSV.POSITIONS);
     }
 
@@ -76,5 +85,11 @@ public class CSV_Position : MonoBehaviour
     public void BeginRace()
     {
         InvokeRepeating("CSVWrite", 0.0f, writeToCSVEverySecond);
+    }
+
+    void OnApplicationQuit()
+    {
+        print("Creating HeatMap Prefab");
+        PrefabUtility.SaveAsPrefabAsset(HeatMapParent, "Assets/HeatMapLastGame.prefab");
     }
 }
