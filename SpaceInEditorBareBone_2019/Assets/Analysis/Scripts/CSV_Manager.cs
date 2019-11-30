@@ -16,32 +16,39 @@ public static class CSV_Manager
     private static string csvFileCrashes = "crashes.csv";
     private static string csvFilePositions = "positions.csv";
     private static string csvFileLaps = "laps.csv";
-
-    private static string csvSeparator = ";";
-
+    
     private static string[] csvSessionsHeaders = new string[4] {
         "session_id",
         "username",
         "session_start",
         "session_end"
     };
-    private static string[] csvCrashesHeaders = new string[7] {
+    private static string[] csvCrashesHeaders = new string[9] {
         "username",
         "crash_id",
-        "positon",
+        "position_x",
+        "position_y",
+        "position_z",
         "current_lap",
         "time",
         "session_id",
         "collision_obj_id"
     };
-    private static string[] csvPositionsHeaders = new string[6] {
+    private static string[] csvPositionsHeaders = new string[14] {
         "session_id",
         "username",
         "time",
-        "position",
-        "velocity",
-        "rotation"
-
+        "position_x",
+        "position_y",
+        "position_z",
+        "velocity_x",
+        "velocity_y",
+        "velocity_z",
+        "rotation_x",
+        "rotation_y",
+        "rotation_z",
+        "rotation_w",
+        "current_lap"
     };
     private static string[] csvLapsHeaders = new string[4] {
         "lap_id",
@@ -53,137 +60,154 @@ public static class CSV_Manager
     public static void AppendToCSV(string[] strings, typeDataCSV type_data)
     {
         //Check if folder exists
-        string directory_path = Application.dataPath + "/" + csvDirectoryName;
-        if (!Directory.Exists(directory_path))
+        string path = Application.dataPath + "/" + csvDirectoryName;
+        if (Directory.Exists(path))
         {
-            Directory.CreateDirectory(directory_path);
+            switch (type_data)
+            {
+                case typeDataCSV.SESSIONS:
+                    path += "/" + csvFileSessions;
+                    AppendData(strings, path);
+                    break;
+                case typeDataCSV.LAPS:
+                    path += "/" + csvFileLaps;
+                    AppendData(strings, path);
+                    break;
+                case typeDataCSV.CRASHES:
+                    path += "/" + csvFileCrashes;
+                    AppendData(strings, path);
+                    break;
+                case typeDataCSV.POSITIONS:
+                    path += "/" + csvFilePositions;
+                    AppendData(strings, path);
+                    break;
+            }
         }
-
-        //Check if files exist
-        AllCSVExists();
-
-        switch (type_data)
+        else
         {
-            case typeDataCSV.SESSIONS:
-                using (StreamWriter sw = File.AppendText(Application.dataPath + "/" + csvDirectoryName + "/" + csvFileSessions))
-                {
-                    string endString = strings[0];
-
-                    for (int i = 1; i < strings.Length; i++)
-                    {
-                        endString += csvSeparator;
-                        endString += strings[i];
-                    }
-
-                    sw.WriteLine(endString);
-
-                    Debug.Log(type_data.ToString() + ": " + endString);
-                }
-                break;
-            case typeDataCSV.LAPS:
-                using (StreamWriter sw = File.AppendText(Application.dataPath + "/" + csvDirectoryName + "/" + csvFileLaps))
-                {
-                    string endString = strings[0];
-
-                    for (int i = 1; i < strings.Length; i++)
-                    {
-                        endString += csvSeparator;
-                        endString += strings[i];
-                    }
-
-                    sw.WriteLine(endString);
-
-                    Debug.Log(type_data.ToString() + ": " + endString);
-                }
-                break;
-
-            case typeDataCSV.CRASHES:
-                using (StreamWriter sw = File.AppendText(Application.dataPath + "/" + csvDirectoryName + "/" + csvFileCrashes))
-                {
-                    string endString = strings[0];
-
-                    for (int i = 1; i < strings.Length; i++)
-                    {
-                        endString += csvSeparator;
-                        endString += strings[i];
-                    }
-
-                    sw.WriteLine(endString);
-
-                    Debug.Log(type_data.ToString() + ": " + endString);
-                }
-                break;
-
-            case typeDataCSV.POSITIONS:
-                using (StreamWriter sw = File.AppendText(Application.dataPath + "/" + csvDirectoryName + "/" + csvFilePositions))
-                {
-                    string endString = strings[0];
-
-                    for (int i = 1; i < strings.Length; i++)
-                    {
-                        endString += csvSeparator;
-                        endString += strings[i];
-                    }
-
-                    sw.WriteLine(endString);
-
-                    Debug.Log(type_data.ToString() + ": " + endString);
-                }
-                break;
+            Debug.Log("directory missing: " + path);
         }
     }
-    
-   
-    public static void AllCSVExists()
+
+    // returns [sessions_count, laps_count, crashes_count,]
+    public static uint[] AllCSVExists()
     {
-        //Path
+        uint[] count = new uint[3];
+
+        // Main directory
         string directory_path = Application.dataPath + "/" + csvDirectoryName;
         if (!Directory.Exists(directory_path))
         {
             Directory.CreateDirectory(directory_path);
         }
-        //
+
+        // Sessions
+        count[0] = 0;
         string csv_sessions = directory_path + "/" + csvFileSessions;
         if (!File.Exists(csv_sessions))
         {
             CreateCSVFile(csv_sessions, csvSessionsHeaders);
         }
-        //
-        string csv_crashes = directory_path + "/" + csvFileCrashes;
-        if (!File.Exists(csv_crashes))
+        else
         {
-            CreateCSVFile(csv_crashes, csvCrashesHeaders);
+            StreamReader strReader = new StreamReader(csv_sessions);
+            string data = strReader.ReadLine();
+            while (data != null)
+            {
+                data = strReader.ReadLine();
+                count[0]++;
+            }
+
+            count[0]--; // remove header
         }
-        //
-        string csv_positions = directory_path + "/" + csvFilePositions;
-        if (!File.Exists(csv_positions))
-        {
-            CreateCSVFile(csv_positions, csvPositionsHeaders);
-        }
-        //
+
+        // Laps
+        count[1] = 0;
         string csv_laps = directory_path + "/" + csvFileLaps;
         if (!File.Exists(csv_laps))
         {
             CreateCSVFile(csv_laps, csvLapsHeaders);
         }
+        else
+        {
+            StreamReader strReader = new StreamReader(csv_laps);
+            string data = strReader.ReadLine();
+            while (data != null)
+            {
+                data = strReader.ReadLine();
+                count[1]++;
+            }
+
+            count[1]--; // remove header
+        }
+
+        // Crashes
+        count[2] = 0;
+        string csv_crashes = directory_path + "/" + csvFileCrashes;
+        if (!File.Exists(csv_crashes))
+        {
+            CreateCSVFile(csv_crashes, csvCrashesHeaders);
+        }
+        else
+        {
+            StreamReader strReader = new StreamReader(csv_crashes);
+            string data = strReader.ReadLine();
+            while (data != null)
+            {
+                data = strReader.ReadLine();
+                count[2]++;
+            }
+
+            count[2]--; // remove header
+        }
+
+        // Positions
+        string csv_positions = directory_path + "/" + csvFilePositions;
+        if (!File.Exists(csv_positions))
+        {
+            CreateCSVFile(csv_positions, csvPositionsHeaders);
+        }
+
+        return count;
     }
 
     static void CreateCSVFile(string path, string[] data)
     {
         using(StreamWriter sw = File.CreateText(path))
         {
-            string endString = "";
-            for(int i = 0; i < data.Length; i++)
+            string endString = data[0];
+            for(int i = 1; i < data.Length; i++)
             {
-                if(endString != "")
-                {
-                    endString += csvSeparator;
-                }
+                endString += ";";
                 endString += data[i]; 
             }
             sw.WriteLine(endString);
         }
     }
+
+    static void AppendData(string[] strings, string path)
+    {
+        if (File.Exists(path))
+        {
+            using (StreamWriter sw = File.AppendText(path))
+            {
+                string endString = strings[0];
+
+                for (int i = 1; i < strings.Length; i++)
+                {
+                    endString += ";";
+                    endString += strings[i];
+                }
+
+                sw.WriteLine(endString);
+            }
+        }
+        else
+        {
+            Debug.Log("file missing: " + path);
+        }
+    }
+
     public static uint NumberSessionsUser(string name)
     {
         uint counter = 0;
@@ -208,5 +232,4 @@ public static class CSV_Manager
         }
         return counter;
     }
-
 }

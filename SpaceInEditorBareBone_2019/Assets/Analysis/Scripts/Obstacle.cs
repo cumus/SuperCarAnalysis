@@ -2,37 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class Obstacle : MonoBehaviour {
-    public Goal data_goal;
-    public CSV_Data data_csv;
-    public GameObject car;
-    public struct crashCSVData
-    {
-        public string player_name;
-        public uint crash_id;
-        public float x, y, z;
-        public uint current_lap;
-        public Time time;
-        public uint session_id;
-        public uint collision_obj;
-    }
-    public uint collision_obj;
-    private crashCSVData current_crash_data;
-    bool finished = false;
+public class Obstacle : MonoBehaviour
+{
+    private GameObject car;
+    private bool finished = false;
+    public uint collision_obj_id;
+    private static uint total_obstacles = 0;
+
     void Start()
     {
-        current_crash_data.collision_obj = collision_obj;
+        car = SceneManager.SM.car;
+        collision_obj_id = total_obstacles++;
     }
+
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.name == "Car" && !finished)
         {
-            current_crash_data.crash_id++;
-
             CSV_Manager.AppendToCSV(CrashesData(), CSV_Manager.typeDataCSV.CRASHES);
-            
-            StartCoroutine(ResetTag());
+
             finished = true;
+            StartCoroutine(ResetTag());
         }
     }
 
@@ -44,23 +34,23 @@ public class Obstacle : MonoBehaviour {
 
     string[] CrashesData()
     {
-        string[] data = new string[7];
-        data[0] = data_csv.GetPlayerName();
-        data[1] = current_crash_data.crash_id.ToString();
+        string[] data = new string[9];
 
-        //pos
-        string car_pos_x = car.transform.position.x.ToString();
-        car_pos_x = car_pos_x.Replace(",", ".");
-        string car_pos_y = car.transform.position.y.ToString();
-        car_pos_y = car_pos_x.Replace(",", ".");
-        string car_pos_z = car.transform.position.z.ToString();
-        car_pos_z = car_pos_x.Replace(",", ".");
+        data[0] = SceneManager.SM.GetUsername();
 
-        data[2] = "(" + car_pos_x + "," + car_pos_y + "," + car_pos_z + ")";
-        data[3] = data_goal.GetLaps().ToString();
-        data[4] = DateTime.Now.ToString();
-        data[5] = data_csv.GetSessionID().ToString();
-        data[6] = current_crash_data.collision_obj.ToString();
+        data[1] = SceneManager.SM.AddCrashGetCount().ToString();
+
+        data[2] = car.transform.position.x.ToString();
+        data[3] = car.transform.position.y.ToString();
+        data[4] = car.transform.position.z.ToString();
+
+        data[5] = SceneManager.SM.GetCurrentLapCount().ToString();
+
+        data[6] = DateTime.Now.ToString();
+
+        data[7] = SceneManager.SM.GetSessionID().ToString();
+
+        data[8] = collision_obj_id.ToString();
 
         return data;
     }

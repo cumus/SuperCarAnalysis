@@ -6,85 +6,65 @@ using UnityEditor;
 
 public class CSV_Position : MonoBehaviour
 {
-    public CSV_Data data_csv;
-    public GameObject car;
-    public Rigidbody car_rb;
-    public float writeToCSVEverySecond = 1.0f;
-
     // HeatMap
-    GameObject HeatMapParent;
+    private GameObject HeatMapParent;
     public GameObject CubeHeatMap;
 
-    public struct positionCSVData
-    {
-        public uint session_id;
-        public string player_name;
-        public Time time;
-        public float x, y, z;
-        public float vel_x, vel_y, vel_z;
-        public float rot_x, rot_y, rot_z;
-    }
+    public float trigger_frecuency = 1.0f;
 
-    private positionCSVData current_pos_data;
+    private GameObject car;
+    private Rigidbody car_rb;
+
+    private string session_id;
+    private string username;
+
     void Start()
     {
+        car = SceneManager.SM.car;
+        car_rb = car.GetComponent<Rigidbody>();
         HeatMapParent = new GameObject("HeatMapParent");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
     void CSVWrite()
     {
-        GameObject heatMapCube = Instantiate(CubeHeatMap, new Vector3(car.transform.position.x, CubeHeatMap.transform.localScale.y / 2, car.transform.position.z), Quaternion.identity, HeatMapParent.transform);
+        //GameObject heatMapCube = Instantiate(CubeHeatMap, new Vector3(car.transform.position.x, CubeHeatMap.transform.localScale.y / 2, car.transform.position.z), Quaternion.identity, HeatMapParent.transform);
 
         CSV_Manager.AppendToCSV(PosData(), CSV_Manager.typeDataCSV.POSITIONS);
     }
 
     string[] PosData()
     {
-        string[] data = new string[6];
+        string[] data = new string[14];
 
-        data[0] = data_csv.GetSessionID().ToString();
-        data[1] = data_csv.GetPlayerName();
+        data[0] = session_id;
+
+        data[1] = username;
+
         data[2] = DateTime.Now.ToString();
-        //pos
-        string car_pos_x = car.transform.position.x.ToString();
-        car_pos_x = car_pos_x.Replace(",", ".");
-        string car_pos_y = car.transform.position.y.ToString();
-        car_pos_y = car_pos_y.Replace(",", ".");
-        string car_pos_z = car.transform.position.z.ToString();
-        car_pos_z = car_pos_z.Replace(",", ".");
 
-        data[3] = "(" + car_pos_x + "," + car_pos_y + "," + car_pos_z + ")";
-        //Vel
-        string car_vel_x = car_rb.velocity.x.ToString();
-        car_vel_x = car_vel_x.Replace(",", ".");
-        string car_vel_y = car_rb.velocity.y.ToString();
-        car_vel_y = car_vel_y.Replace(",", ".");
-        string car_vel_z = car_rb.velocity.z.ToString();
-        car_vel_z = car_vel_z.Replace(",", ".");
+        data[3] = car.transform.position.x.ToString();
+        data[4] = car.transform.position.y.ToString();
+        data[5] = car.transform.position.z.ToString();
 
-        data[4] = "(" + car_vel_x + "," + car_vel_y + "," + car_vel_z + ")";
-        //Rot
-        string car_rot_x = car.transform.rotation.x.ToString();
-        car_rot_x = car_rot_x.Replace(",", ".");
-        string car_rot_y = car.transform.rotation.y.ToString();
-        car_rot_y = car_rot_y.Replace(",", ".");
-        string car_rot_z = car.transform.rotation.z.ToString();
-        car_rot_z = car_rot_z.Replace(",", ".");
-        string car_rot_w = car.transform.rotation.w.ToString();
-        car_rot_w = car_rot_w.Replace(",", ".");
+        data[6] = car_rb.velocity.x.ToString();
+        data[7] = car_rb.velocity.y.ToString();
+        data[8] = car_rb.velocity.z.ToString();
 
-        data[5] = "(" + car_rot_x + "," + car_rot_y + "," + car_rot_z + "," + car_rot_w + ")";
+        data[9] = car.transform.rotation.x.ToString();
+        data[10] = car.transform.rotation.y.ToString();
+        data[11] = car.transform.rotation.z.ToString();
+        data[12] = car.transform.rotation.w.ToString();
+
+        data[13] = SceneManager.SM.GetCurrentLapCount().ToString();
 
         return data;
     }
 
-    public void BeginRace()
+    public void BeginRace(string _username, string _session_id)
     {
-        InvokeRepeating("CSVWrite", 0.0f, writeToCSVEverySecond);
+        session_id = _session_id;
+        username = _username;
+        InvokeRepeating("CSVWrite", 0.0f, trigger_frecuency);
     }
 
     void OnApplicationQuit()
