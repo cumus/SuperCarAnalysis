@@ -4,15 +4,14 @@ using UnityEngine;
 using System;
 public class Obstacle : MonoBehaviour
 {
+    public uint collision_obj_id;
+
     private GameObject car;
     private bool finished = false;
-    public uint collision_obj_id;
-    private static uint total_obstacles = 0;
 
     void Start()
     {
         car = SceneManager.SM.car;
-        collision_obj_id = total_obstacles++;
     }
 
     void OnCollisionEnter(Collision col)

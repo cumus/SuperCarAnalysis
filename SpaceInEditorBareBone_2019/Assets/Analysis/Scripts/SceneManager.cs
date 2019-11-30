@@ -8,22 +8,22 @@ public class SceneManager : MonoBehaviour
 {
     // keep the static reference to singleton private
     [HideInInspector] public static SceneManager SM;
-    
+
+    public uint total_registered_sessions;
+    public uint total_registered_laps;
+    public uint total_registered_crashes;
+
     public GameObject cam2;
     public GameObject canvas;
     public InputField inputField;
     public GameObject car;
     public Goal goal;
+    public Obstacle[] obstacles;
 
     private string username;
     private string session_start;
     private string session_end;
-
     private uint current_lap;
-
-    public uint total_registered_sessions;
-    public uint total_registered_laps;
-    public uint total_registered_crashes;
 
     void Awake()
     {
@@ -38,13 +38,20 @@ public class SceneManager : MonoBehaviour
     void Start()
     {
         car.SetActive(false);
+
+        for (uint i = 0; i < 16; i++)
+        {
+            obstacles[i].collision_obj_id = i;
+        }
     }
 
     void OnApplicationQuit()
     {
-        session_end = DateTime.Now.ToString();
-
-        CSV_Manager.AppendToCSV(SessionsData(), CSV_Manager.typeDataCSV.SESSIONS);
+        if (car.activeSelf)
+        {
+            session_end = DateTime.Now.ToString();
+            CSV_Manager.AppendToCSV(SessionsData(), CSV_Manager.typeDataCSV.SESSIONS);
+        }
     }
 
     string[] SessionsData()

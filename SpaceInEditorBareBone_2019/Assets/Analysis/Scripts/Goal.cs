@@ -44,7 +44,7 @@ public class Goal : MonoBehaviour
         return data;
     }
 
-    public void BeginRace(string _username, string _session_id)
+    public void BeginRace(string _session_id, string _username)
     {
         session_id = _session_id;
         username = _username;
