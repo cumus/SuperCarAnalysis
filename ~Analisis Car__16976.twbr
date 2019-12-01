@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <!-- build 20194.19.1010.1202                               -->
-<workbook original-version='18.1' source-build='2019.4.0 (20194.19.1010.1202)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+<workbook source-build='2019.4.0 (20194.19.1010.1202)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
   <document-format-change-manifest>
     <SheetIdentifierTracking ignorable='true' predowngraded='true' />
     <WindowsPersistSimpleIdentifiers />
@@ -575,6 +575,12 @@
       <column caption='Grided Pos Z' datatype='integer' name='[Calculation_1194579862325714962]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='INT([position_z (positions.csv)]/10)' />
       </column>
+      <column caption='Grided Crash Pos X' datatype='integer' name='[Calculation_1194579862341287956]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='INT([position_x]/2)' />
+      </column>
+      <column caption='Grided Crash Pos Z' datatype='integer' name='[Calculation_1194579862341517333]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='INT([position_z]/2)' />
+      </column>
       <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
         <calculation class='tableau' formula='1' />
       </column>
@@ -611,6 +617,7 @@
       <column caption='Velocity Z' datatype='real' name='[velocity_z]' role='measure' type='quantitative' />
       <column-instance column='[position_x (positions.csv)]' derivation='Attribute' name='[attr:position_x (positions.csv):qk]' pivot='key' type='quantitative' />
       <column-instance column='[position_z (positions.csv)]' derivation='Attribute' name='[attr:position_z (positions.csv):qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1194579862313402369]' derivation='Avg' name='[avg:Calculation_1194579862313402369:qk]' pivot='key' type='quantitative' />
       <column-instance column='[position_x (positions.csv)]' derivation='Count' name='[cnt:position_x (positions.csv):qk]' pivot='key' type='quantitative' />
       <column-instance column='[position_z (positions.csv)]' derivation='Count' name='[cnt:position_z (positions.csv):qk]' pivot='key' type='quantitative' />
       <column-instance column='[position_z (positions.csv)]' derivation='CountD' name='[ctd:position_z (positions.csv):qk]' pivot='key' type='quantitative' />
@@ -619,12 +626,18 @@
       <column-instance column='[position_z (positions.csv)]' derivation='None' name='[none:position_z (positions.csv):qk]' pivot='key' type='quantitative' />
       <column-instance column='[position_x (positions.csv)]' derivation='Stdev' name='[std:position_x (positions.csv):qk]' pivot='key' type='quantitative' />
       <column-instance column='[position_z (positions.csv)]' derivation='Stdev' name='[std:position_z (positions.csv):qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1194579862313402369]' derivation='Sum' name='[sum:Calculation_1194579862313402369:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1194579862325587985]' derivation='Sum' name='[sum:Calculation_1194579862325587985:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1194579862325714962]' derivation='Sum' name='[sum:Calculation_1194579862325714962:qk]' pivot='key' type='quantitative' />
       <column-instance column='[Number of Records]' derivation='Sum' name='[sum:Number of Records:qk]' pivot='key' type='quantitative' />
       <column-instance column='[current_lap (positions.csv)]' derivation='Sum' name='[sum:current_lap (positions.csv):qk]' pivot='key' type='quantitative' />
       <column-instance column='[current_lap]' derivation='Sum' name='[sum:current_lap:qk]' pivot='key' type='quantitative' />
       <column-instance column='[position_x (positions.csv)]' derivation='Sum' name='[sum:position_x (positions.csv):qk]' pivot='key' type='quantitative' />
+      <column-instance column='[position_x]' derivation='Sum' name='[sum:position_x:qk]' pivot='key' type='quantitative' />
       <column-instance column='[position_y (positions.csv)]' derivation='Sum' name='[sum:position_y (positions.csv):qk]' pivot='key' type='quantitative' />
+      <column-instance column='[position_y]' derivation='Sum' name='[sum:position_y:qk]' pivot='key' type='quantitative' />
       <column-instance column='[position_z (positions.csv)]' derivation='Sum' name='[sum:position_z (positions.csv):qk]' pivot='key' type='quantitative' />
+      <column-instance column='[position_z]' derivation='Sum' name='[sum:position_z:qk]' pivot='key' type='quantitative' />
       <column-instance column='[rotation_w]' derivation='Sum' name='[sum:rotation_w:qk]' pivot='key' type='quantitative' />
       <column-instance column='[rotation_x]' derivation='Sum' name='[sum:rotation_x:qk]' pivot='key' type='quantitative' />
       <column-instance column='[rotation_y]' derivation='Sum' name='[sum:rotation_y:qk]' pivot='key' type='quantitative' />
@@ -632,7 +645,7 @@
       <column-instance column='[velocity_x]' derivation='Sum' name='[sum:velocity_x:qk]' pivot='key' type='quantitative' />
       <column-instance column='[velocity_y]' derivation='Sum' name='[sum:velocity_y:qk]' pivot='key' type='quantitative' />
       <column-instance column='[velocity_z]' derivation='Sum' name='[sum:velocity_z:qk]' pivot='key' type='quantitative' />
-      <layout dim-ordering='alphabetic' dim-percentage='0.418136' measure-ordering='alphabetic' measure-percentage='0.581864' show-structure='true' user-set-layout='true' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.365239' measure-ordering='alphabetic' measure-percentage='0.634761' show-structure='true' user-set-layout='true' />
       <style>
         <style-rule element='mark'>
           <encoding attr='shape' field='[:Measure Names]' type='shape'>
@@ -664,13 +677,22 @@
               <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:position_x (positions.csv):qk]&quot;</bucket>
             </map>
             <map to='circle'>
+              <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:Calculation_1194579862325587985:qk]&quot;</bucket>
+            </map>
+            <map to='circle'>
               <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:current_lap:qk]&quot;</bucket>
             </map>
             <map to='circle'>
               <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:velocity_y:qk]&quot;</bucket>
             </map>
             <map to='diamond'>
+              <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:position_x:qk]&quot;</bucket>
+            </map>
+            <map to='diamond'>
               <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:position_y (positions.csv):qk]&quot;</bucket>
+            </map>
+            <map to='down-triangle'>
+              <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:position_y:qk]&quot;</bucket>
             </map>
             <map to='down-triangle'>
               <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:rotation_w:qk]&quot;</bucket>
@@ -685,16 +707,25 @@
               <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:Calculation_1070449395979149319:qk]&quot;</bucket>
             </map>
             <map to='right-triangle'>
+              <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:position_z:qk]&quot;</bucket>
+            </map>
+            <map to='right-triangle'>
               <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:rotation_y:qk]&quot;</bucket>
             </map>
             <map to='right-triangle'>
               <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:velocity_x:qk]&quot;</bucket>
             </map>
             <map to='square'>
+              <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[avg:Calculation_1194579862313402369:qk]&quot;</bucket>
+            </map>
+            <map to='square'>
               <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:Number of Records:qk]&quot;</bucket>
             </map>
             <map to='square'>
               <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:velocity_z:qk]&quot;</bucket>
+            </map>
+            <map to='times'>
+              <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:Calculation_1194579862325714962:qk]&quot;</bucket>
             </map>
             <map to='times'>
               <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:current_lap (positions.csv):qk]&quot;</bucket>
@@ -719,6 +750,9 @@
             </map>
             <map to='triangle'>
               <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[std:position_z (positions.csv):qk]&quot;</bucket>
+            </map>
+            <map to='triangle'>
+              <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:Calculation_1194579862313402369:qk]&quot;</bucket>
             </map>
             <map to='triangle'>
               <bucket>&quot;[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:Calculation_1194579862320746507:qk]&quot;</bucket>
@@ -2419,7 +2453,7 @@
     </datasource>
   </datasources>
   <worksheets>
-    <worksheet name='Speed Heatmap'>
+    <worksheet name='Avg Speed Heatmap'>
       <table>
         <view>
           <datasources>
@@ -2447,10 +2481,69 @@
         </view>
         <style>
           <style-rule element='cell'>
-            <format attr='width' field='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1194579862325714962:ok]' value='30' />
+            <format attr='cell-w' value='20' />
+            <format attr='cell-h' value='20' />
+            <format attr='cell' value='20' />
+            <format attr='cell-q' value='100' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='width' field='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1194579862325587985:ok]' value='28' />
           </style-rule>
           <style-rule element='mark'>
-            <encoding attr='color' center='7.0' field='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[avg:Calculation_1194579862313402369:qk]' min='0.0' palette='red_green_diverging_10_0' type='interpolated' />
+            <encoding attr='color' field='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[avg:Calculation_1194579862313402369:qk]' min='0.0' palette='red_green_gold_diverging_10_0' type='interpolated' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[avg:Calculation_1194579862313402369:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='1.7999999523162842' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1194579862325587985:ok]</rows>
+        <cols>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1194579862325714962:ok]</cols>
+      </table>
+      <simple-id uuid='{2F0A917D-6DCE-4484-9EFC-CA3AF9110860}' />
+    </worksheet>
+    <worksheet name='Crashes Heatmap'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='crashes' name='federated.0dgf5jk1xbiiw418pu2s90s3etom' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0dgf5jk1xbiiw418pu2s90s3etom'>
+            <column caption='Grided Crash Pos X' datatype='integer' name='[Calculation_1194579862341287956]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='INT([position_x]/2)' />
+            </column>
+            <column caption='Grided Crash Pos Z' datatype='integer' name='[Calculation_1194579862341517333]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='INT([position_z]/2)' />
+            </column>
+            <column-instance column='[Calculation_1194579862341287956]' derivation='None' name='[none:Calculation_1194579862341287956:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Calculation_1194579862341517333]' derivation='None' name='[none:Calculation_1194579862341517333:ok]' pivot='key' type='ordinal' />
+            <column caption='Position X' datatype='real' name='[position_x]' role='measure' type='quantitative' />
+            <column caption='Position Z' datatype='real' name='[position_z]' role='measure' type='quantitative' />
+            <column-instance column='[position_x]' derivation='Sum' name='[sum:position_x:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='cell-w' value='20' />
+            <format attr='cell-h' value='20' />
+            <format attr='cell' value='20' />
+            <format attr='cell-q' value='100' />
           </style-rule>
         </style>
         <panes>
@@ -2460,9 +2553,77 @@
             </view>
             <mark class='Automatic' />
             <encodings>
-              <color column='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[avg:Calculation_1194579862313402369:qk]' />
+              <color column='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:position_x:qk]' />
             </encodings>
             <style>
+              <style-rule element='mark'>
+                <format attr='size' value='1.7999999523162842' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1194579862341517333:ok]</rows>
+        <cols>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1194579862341287956:ok]</cols>
+      </table>
+      <simple-id uuid='{A08CCF71-4910-4FD7-B745-11B4B0CB958E}' />
+    </worksheet>
+    <worksheet name='Density Heatmap'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='crashes' name='federated.0dgf5jk1xbiiw418pu2s90s3etom' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0dgf5jk1xbiiw418pu2s90s3etom'>
+            <column caption='Speed' datatype='real' name='[Calculation_1194579862313402369]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [velocity_x] = NULL THEN 0 ELSE SQRT(ABS([velocity_x]*[velocity_z])) END' />
+            </column>
+            <column caption='Grided Pos X' datatype='integer' name='[Calculation_1194579862325587985]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='INT([position_x (positions.csv)]/10)' />
+            </column>
+            <column caption='Grided Pos Z' datatype='integer' name='[Calculation_1194579862325714962]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='INT([position_z (positions.csv)]/10)' />
+            </column>
+            <column-instance column='[Calculation_1194579862313402369]' derivation='Count' name='[cnt:Calculation_1194579862313402369:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1194579862325587985]' derivation='None' name='[none:Calculation_1194579862325587985:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Calculation_1194579862325714962]' derivation='None' name='[none:Calculation_1194579862325714962:ok]' pivot='key' type='ordinal' />
+            <column caption='Position X (Positions.Csv)' datatype='real' name='[position_x (positions.csv)]' role='measure' type='quantitative' />
+            <column caption='Position Z (Positions.Csv)' datatype='real' name='[position_z (positions.csv)]' role='measure' type='quantitative' />
+            <column caption='Velocity X' datatype='real' name='[velocity_x]' role='measure' type='quantitative' />
+            <column caption='Velocity Z' datatype='real' name='[velocity_z]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='cell-w' value='20' />
+            <format attr='cell-h' value='20' />
+            <format attr='cell' value='20' />
+            <format attr='cell-q' value='100' />
+            <format attr='width' field='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1194579862325714962:ok]' value='23' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='width' field='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1194579862325587985:ok]' value='28' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[cnt:Calculation_1194579862313402369:qk]' min='0' palette='green_gold_10_0' type='interpolated' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[cnt:Calculation_1194579862313402369:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='1.7999999523162842' />
+              </style-rule>
               <style-rule element='pane'>
                 <format attr='minwidth' value='-1' />
                 <format attr='maxwidth' value='-1' />
@@ -2473,11 +2634,61 @@
         <rows>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1194579862325587985:ok]</rows>
         <cols>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1194579862325714962:ok]</cols>
       </table>
-      <simple-id uuid='{2F0A917D-6DCE-4484-9EFC-CA3AF9110860}' />
+      <simple-id uuid='{E1B47286-22E4-48E5-B0F3-616A926FFFB4}' />
     </worksheet>
   </worksheets>
   <windows source-height='30'>
-    <window class='worksheet' maximized='true' name='Speed Heatmap'>
+    <window class='worksheet' name='Density Heatmap'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='175'>
+            <card pane-specification-id='0' param='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[cnt:Calculation_1194579862313402369:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{F1213155-04CF-477B-842B-A959DE51795E}' />
+    </window>
+    <window class='worksheet' name='Avg Speed Heatmap'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='175'>
+            <card pane-specification-id='0' param='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[avg:Calculation_1194579862313402369:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{853EF090-100D-42B5-BA67-1F1A230BCD79}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Crashes Heatmap'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -2498,160 +2709,12 @@
           </strip>
         </edge>
         <edge name='right'>
-          <strip size='175'>
-            <card pane-specification-id='2' param='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[avg:Calculation_1194579862313402369:qk]' type='color' />
+          <strip size='0'>
+            <card pane-specification-id='2' param='[federated.0dgf5jk1xbiiw418pu2s90s3etom].[sum:position_x:qk]' type='color' />
           </strip>
         </edge>
       </cards>
-      <viewpoint>
-        <highlight>
-          <color-one-way>
-            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[avg:Calculation_1194579862313402369:qk]</field>
-            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1194579862315823107:qk]</field>
-            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1194579862315864068:qk]</field>
-            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:Calculation_1194579862316187654:qk]</field>
-            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:position_x (positions.csv):ok]</field>
-            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:position_y (positions.csv):ok]</field>
-            <field>[federated.0dgf5jk1xbiiw418pu2s90s3etom].[none:position_y (positions.csv):qk]</field>
-          </color-one-way>
-        </highlight>
-      </viewpoint>
-      <simple-id uuid='{853EF090-100D-42B5-BA67-1F1A230BCD79}' />
+      <simple-id uuid='{850B241F-060B-43F5-B1E0-FBE1E880EA7E}' />
     </window>
   </windows>
-  <thumbnails>
-    <thumbnail height='192' name='Speed Heatmap' width='192'>
-      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
-      RU5ErkJggg==
-    </thumbnail>
-  </thumbnails>
 </workbook>
