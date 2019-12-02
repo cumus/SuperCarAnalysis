@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEditor;
-
 public class HeatMap : MonoBehaviour
 {
     public enum HeatmapSHOW
@@ -11,13 +10,16 @@ public class HeatMap : MonoBehaviour
         DENSITY,
         AVERAGE_SPEED
     };
-
+    private Material[,] mat;
     public GameObject HeatMapCube;
-    public float map_size_x = 500.0f;
-    public float map_size_z = 500.0f;
-    public int grid_size_x = 46;
-    public int grid_size_z = 42;
-
+    private float map_size_x = 500.0f;
+    private float map_size_z = 500.0f;
+    [Space]
+    [Header("Max grid and recommend size is 23")]
+    public int grid_size_x = 23;
+    public int grid_size_z = 23;
+    private int counter_materials;
+    public Material HeatMapMaterial;
     [HideInInspector] public HeatmapSHOW type;
     [HideInInspector] public float y_scale = 10.0f;
     [HideInInspector] public bool normalized = false;
@@ -52,7 +54,7 @@ public class HeatMap : MonoBehaviour
                 DestroyImmediate(t.gameObject, true);
             }
         }
-
+        mat = null;
         heatMapsArray = null;
         grid_data = null;
     }
@@ -66,6 +68,14 @@ public class HeatMap : MonoBehaviour
     public void BuildGrid()
     {
         // Update user defined size
+        if(grid_size_x > 24)
+        {
+            grid_size_x = 23;
+        }
+        if(grid_size_z > 24)
+        {
+            grid_size_z = 23;
+        }
         current_grid_size_x = grid_size_x;
         current_grid_size_z = grid_size_z;
 
@@ -74,17 +84,21 @@ public class HeatMap : MonoBehaviour
         grid_data = new float[current_grid_size_x, current_grid_size_z, 2];
         entries_count = 0;
         max_speed = 0.0f;
-
+        mat = new Material[current_grid_size_x,current_grid_size_z];
         for (int i = 0; i < current_grid_size_x; i++)
         {
             for (int j = 0; j < current_grid_size_z; j++)
             {
+                
                 // Instanciate childs
                 heatMapsArray[i, j] = Instantiate(
                     HeatMapCube,
                     new Vector3(((float)i * size_x) + (size_x / 2.0f), 0.01f, ((float)j * size_z) + (size_z / 2.0f)),
                     Quaternion.identity,
                     transform);
+               
+                mat[i,j] = new Material(heatMapsArray[i, j].GetComponent<Renderer>().sharedMaterial);
+                heatMapsArray[i, j].GetComponent<Renderer>().sharedMaterial = (Material)Instantiate(mat[i, j] );
                 heatMapsArray[i, j].transform.localScale = new Vector3(size_x, 0.005f, size_z);
 
                 // Reset grid_data
@@ -187,15 +201,17 @@ public class HeatMap : MonoBehaviour
                             {
                                 if (normalized)
                                     height = (grid_data[i, j, 1] / grid_data[i, j, 0]) / max_speed;
+
                                 else
                                     height = (grid_data[i, j, 1] / grid_data[i, j, 0]) / max_average_speed;
 
                                 break;
                             }
                     }
-
                     height *= y_scale;
                 }
+
+                heatMapsArray[i, j].GetComponent<Renderer>().sharedMaterial.color = new Color(1.0f - height/5, height/5, 0, 0.7f);
 
                 heatMapsArray[i, j].transform.localScale = new Vector3(
                     size_x,
@@ -215,6 +231,7 @@ public class HeatMap : MonoBehaviour
 
     public void SetType(HeatmapSHOW t)
     {
+
         if (type != t)
         {
             type = t;
@@ -224,6 +241,7 @@ public class HeatMap : MonoBehaviour
 
     public void UpdateYScale(float new_scale)
     {
+
         if (y_scale != new_scale)
         {
             y_scale = new_scale;
